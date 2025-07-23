@@ -22,7 +22,8 @@ func AddBid(client *redis.Client, bookingID string, bid Bid) error {
 	}
 	err = client.RPush(ctx, key, bidJSON).Err()
 	if err == nil {
-		client.Expire(ctx, key, time.Hour) // optional expiration
+		// client.Expire(ctx, key, time.Hour) // optional expiration
+		client.Expire(ctx, key, 15*time.Minute)
 	}
 	return err
 }
